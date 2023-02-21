@@ -4,73 +4,81 @@ const isValidLenght = (str, maxLength) =>
 
 // Проверяет стороку на палиндром
 const isPalindrome = (str) => {
-  str = str
-    .replaceAll(' ','')
-    .toLowerCase();
+  str = str.replace(/\s+/g,'').toLowerCase();
 
-  return str === str.split('').reverse().join('');
+  // * Легкочитаемый вариант:
+  // return str === [...str].reverse().join('');
+
+  // * Оптимальный (по скорости) вариант:
+  const len = str.length;
+  for (let i = 0; i < len / 2 ; i++) {
+    if (str[i] !== str[len - i - 1]) {
+      return false;
+    }
+  }
+  return true;
 };
 
 // Извлекает из строки цифры и преобразует их в целое положительное число или NaN
-const extractNumbers = (str) => {
-  const result = [];
-  str = String(str).replaceAll(' ','');
-  str = [...str];
-  str.forEach((char) => {
-    if (Number.isInteger(Number(char))) {
-      result.push(char);
-    }
-  });
+const extractNumber = (str) => {
+  // * Оптимальный вариант
+  let result = String(str).replace(/\D+/g, '');
 
-  return (result.length) ? parseInt(result.join(''), 10) : NaN;
+  /* - Вариант с циклами
+  str = String(str).replaceAll(' ', '');
+
+  let result = '';
+  for (let i=0; i < str.length; i++) {
+    if (Number.isInteger(Number(str[i]))) {
+      result += (str[i]);
+    }
+  }
+  */
+
+  result = (result.length) ? Number(result) : NaN;
+
+  return result;
 };
 
-// Кастомная набивка строки
+// Набивка строки с начала с вырезанием остатка набивки
 const makePadStart = (str, minLength, pad) => {
-  const paddingLength = minLength - str.length;
-  let pattern = '';
-  if (paddingLength > 0) {
-    for (let i = 1; i <= paddingLength / pad.length; i++) {
-      pattern += pad;
-    }
-    const remainder = paddingLength % pad.length;
-    pattern = (remainder ? pad.slice(0, remainder) : '') + pattern;
-    return pattern.slice(0, paddingLength) + str;
+  const extraLength = minLength - str.length;
+  if (extraLength > 0) {
+    str = pad.slice(0, extraLength % pad.length) + pad.repeat(extraLength / pad.length) + str;
   }
-
   return str;
 };
 
-
 isValidLenght('проверяемая строка', 20);
 isPalindrome('топот');
-extractNumbers('2023 год');
+extractNumber('2023 год');
 makePadStart('1', 2, '0');
 
 
 // console.log('* isValidLenght *');
-// console.log(isValidLenght('проверяемая строка', 20));
-// console.log(isValidLenght('проверяемая строка', 18));
-// console.log(isValidLenght('проверяемая строка', 10));
+// console.log(isValidLenght('проверяемая строка', 20));       // true
+// console.log(isValidLenght('проверяемая строка', 18));       // true
+// console.log(isValidLenght('проверяемая строка', 10));       // false
 
 // console.log('* isPalindrome *');
-// console.log(isPalindrome('топот'));
-// console.log(isPalindrome('ДовОд'));
-// console.log(isPalindrome('Кекс'));
-// console.log(isPalindrome('Лёша на полке клопа нашёл '));
+// console.log(isPalindrome('топот'));                         // true
+// console.log(isPalindrome('ДовОд'));                         // true
+// console.log(isPalindrome('Кекс'));                          // false
+// console.log(isPalindrome('Лёша на полке клопа нашёл '));    // true
 
-// console.log('* extractNumbers *');
-// console.log(extractNumbers('2023 год'));
-// console.log(extractNumbers('ECMAScript 2022'));
-// console.log(extractNumbers('1 кефир, 0.5 батона'));
-// console.log(extractNumbers('а я томат'));
-// console.log(extractNumbers(2023));
-// console.log(extractNumbers(-1));
-// console.log(extractNumbers(1.5));
+// console.log('* extractNumber *');
+// console.log(extractNumber('2023 год'));                     // 2023
+// console.log(extractNumber('ECMAScript 2022'));              // 2022
+// console.log(extractNumber('1 кефир, 0.5 батона'));          // 105
+// console.log(extractNumber('агент 007'));                    // 7
+// console.log(extractNumber('а я томат'));                    // NaN
+// console.log(extractNumber(2023));                           // 2023
+// console.log(extractNumber(-1));                             // 1
+// console.log(extractNumber(1.5));                            // 15
 
 // console.log('* makePadStart *');
-// console.log(makePadStart('1', 2, '0'));
-// console.log(makePadStart('1', 4, '0'));
-// console.log(makePadStart('q', 4, 'werty'));
-// console.log(makePadStart('q', 4, 'we'));
-// console.log(makePadStart('qwerty', 4, '0'));
+// console.log(makePadStart('1', 2, '0'));                     // '01'
+// console.log(makePadStart('1', 4, '0'));                     // '0001'
+// console.log(makePadStart('q', 4, 'werty'));                 // 'werq'
+// console.log(makePadStart('q', 4, 'we'));                    // 'wweq'
+// console.log(makePadStart('qwerty', 4, '0'));                // 'qwerty'
