@@ -79,7 +79,7 @@ const generateComment = () =>
     name: getRandomElement(NAMES),
   });
 
-const createPhoto = () =>
+const generatePhoto = () =>
   ({
     id: photoIdCounter(),
     url: `photos/${getUrlNumber()}.jpg`,
@@ -88,8 +88,7 @@ const createPhoto = () =>
     comments: Array.from({length: getRandomInRange(0, MESSAGES.length)}, generateComment),
   });
 
-// eslint-disable-next-line
-const mockPhotos = Array.from({length: NUMBER_OF_PHOTOS}, createPhoto);
+const mockPhotos = Array.from({length: NUMBER_OF_PHOTOS}, generatePhoto);
 
-// console.log(mockPhotos);
+export {mockPhotos};
 
