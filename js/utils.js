@@ -59,5 +59,7 @@ const makePadStart = (str, minLength, pad) => {
   return str;
 };
 
-export {isValidLenght, isPalindrome, extractNumber, makePadStart};
-export {getRandomInRange, getCounterGenerator, getUniqueRandomGenerator, getRandomElement};
+export {
+  isValidLenght, isPalindrome, extractNumber, makePadStart,
+  getRandomInRange, getCounterGenerator, getUniqueRandomGenerator, getRandomElement
+};
