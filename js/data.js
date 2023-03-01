@@ -1,7 +1,6 @@
-import {NUMBER_OF_PHOTOS} from './setup.js';
+import {PHOTOS_AMOUNT, Likes, Avatar, Message} from './setup.js';
 import {
   getRandomInRange,
-  getCounterGenerator,
   getUniqueRandomGenerator,
   getRandomElement} from './utils.js';
 
@@ -39,27 +38,27 @@ const NAMES = [
   'Tom'
 ];
 
-const photoIdCounter = getCounterGenerator();
-const commentIdCounter = getCounterGenerator();
-const getUrlNumber = getUniqueRandomGenerator(NUMBER_OF_PHOTOS);
+const getUrlNumber = getUniqueRandomGenerator(PHOTOS_AMOUNT);
 
-const generateComment = () =>
+const generateComment = (_, index) =>
   ({
-    id: commentIdCounter(),
-    avatar: `img/avatar-${getRandomInRange(1, 6)}.svg`,
-    message: getRandomElement(MESSAGES),
+    id: ++index,
+    avatar: `img/avatar-${getRandomInRange(Avatar.MIN, Avatar.MAX)}.svg`,
+    message: Array
+      .from({length: getRandomInRange(Message.MIN, Message.MAX)}, () => getRandomElement(MESSAGES))
+      .join(' '),
     name: getRandomElement(NAMES),
   });
 
-const generatePhoto = () =>
+const generatePhoto = (_, index) =>
   ({
-    id: photoIdCounter(),
+    id: ++index,
     url: `photos/${getUrlNumber()}.jpg`,
     description: getRandomElement(PHOTO_DESC),
-    likes: getRandomInRange(15, 200),
-    comments: Array.from({length: getRandomInRange(0, MESSAGES.length)}, generateComment),
+    likes: getRandomInRange(Likes.MIN, Likes.MAX),
+    comments: Array
+      .from({length: getRandomInRange(0, MESSAGES.length)}, generateComment),
   });
 
 const mockPhotos = (elements) => Array.from({length: elements}, generatePhoto);
-
 export {mockPhotos};
