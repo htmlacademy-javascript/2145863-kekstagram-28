@@ -1,7 +1,7 @@
 const pictures = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
-const createThumbnail = ({url : src, comments, likes, description}) => {
+const createThumbnail = ({url: src, comments, likes, description}) => {
   const pictureNode = document.createElement('a');
   pictureNode.href = '#';
   pictureNode.classList.add('picture');
