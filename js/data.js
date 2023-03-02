@@ -1,4 +1,4 @@
-import {PHOTOS_AMOUNT, Likes, Avatar, Message} from './setup.js';
+import { PHOTOS_AMOUNT, Likes, Avatar, Message } from './setup.js';
 import {
   getRandomInRange,
   getUniqueRandomGenerator,
@@ -61,4 +61,4 @@ const generatePhoto = (_, index) =>
   });
 
 const mockPhotos = (elements) => Array.from({length: elements}, generatePhoto);
-export {mockPhotos};
+export { mockPhotos };
