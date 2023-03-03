@@ -1,4 +1,5 @@
 import { isEscape } from './utils.js';
+
 const picture = document.querySelector('.big-picture');
 const closeButton = picture.querySelector('.big-picture__cancel');
 
