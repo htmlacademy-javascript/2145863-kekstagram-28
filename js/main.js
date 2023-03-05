@@ -1,6 +1,6 @@
-import {PHOTOS_AMOUNT} from './setup.js';
-import {mockPhotos} from './data.js';
-import {renderThumbnails} from './render-thumbnails.js';
+import { PHOTOS_AMOUNT } from './setup.js';
+import { mockPhotos } from './data.js';
+import { initGalery, showGallery } from './gallery.js';
 
-const thumbnails = mockPhotos(PHOTOS_AMOUNT);
-renderThumbnails(thumbnails);
+initGalery(mockPhotos(PHOTOS_AMOUNT));
+showGallery();

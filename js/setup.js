@@ -15,4 +15,4 @@ const Message = {
   MAX: 2,
 };
 
-export {PHOTOS_AMOUNT, Likes, Avatar, Message};
+export { PHOTOS_AMOUNT, Likes, Avatar, Message };

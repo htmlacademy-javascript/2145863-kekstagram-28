@@ -59,7 +59,11 @@ const makePadStart = (str, minLength, pad) => {
   return str;
 };
 
+const isEscape = (evt) => evt.key === 'Escape';
+const isEnter = (evt) => evt.key === 'Enter';
+
 export {
   isValidLenght, isPalindrome, extractNumber, makePadStart,
-  getRandomInRange, getCounterGenerator, getUniqueRandomGenerator, getRandomElement
+  getRandomInRange, getCounterGenerator, getUniqueRandomGenerator, getRandomElement,
+  isEscape, isEnter
 };
