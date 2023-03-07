@@ -1,4 +1,6 @@
-const PHOTOS_AMOUNT = 25; // Количество моковых объектов фотографий
+const PHOTOS_AMOUNT = 25; // количество моковых объектов фотографий
+const COMMENTS_AMOUNT = 5; // количетво подгружаемых за один раз комментариев
+const COMMENTS_MAX = 17; // максимальное количество генерируемых коментариев
 
 const Likes = {
   MIN: 15,
@@ -15,4 +17,7 @@ const Message = {
   MAX: 2,
 };
 
-export { PHOTOS_AMOUNT, Likes, Avatar, Message };
+export {
+  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX,
+  Likes, Avatar, Message
+};

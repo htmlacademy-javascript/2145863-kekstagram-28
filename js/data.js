@@ -1,4 +1,4 @@
-import { PHOTOS_AMOUNT, Likes, Avatar, Message } from './setup.js';
+import { PHOTOS_AMOUNT, COMMENTS_MAX, Likes, Avatar, Message } from './setup.js';
 import {
   getRandomInRange,
   getUniqueRandomGenerator,
@@ -57,7 +57,7 @@ const generatePhoto = (_, index) =>
     description: getRandomElement(PHOTO_DESC),
     likes: getRandomInRange(Likes.MIN, Likes.MAX),
     comments: Array
-      .from({length: getRandomInRange(0, MESSAGES.length)}, generateComment),
+      .from({length: getRandomInRange(0, COMMENTS_MAX)}, generateComment),
   });
 
 const mockPhotos = (elements) => Array.from({length: elements}, generatePhoto);
