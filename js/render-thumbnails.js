@@ -1,3 +1,5 @@
+import './upload-picture.js';
+
 const pictures = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 

@@ -1,4 +1,4 @@
-import { isEscape } from './utils.js';
+import { isEscape, formatCommetsAmount } from './utils.js';
 import { COMMENTS_AMOUNT } from './setup.js';
 
 const picture = document.querySelector('.big-picture');
@@ -41,7 +41,7 @@ const showNextComments = () => {
   const total = comments.data.length;
   commentsCounterNode.innerHTML =
     `${comments.curentCounter} из <span class="comments-count">${total}</span>
-    ${(total === 1 ? 'комментария' : 'комментариев')}`;
+    ${formatCommetsAmount(total)}`;
 };
 
 
