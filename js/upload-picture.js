@@ -1,6 +1,7 @@
 import { isEscape, isHidden } from './utils.js';
 import { Scale, SLIDER_SETUP, FILTERS} from './setup.js';
-import './upload-picture-validation.js';
+import {initPristine, resetValidation, validateUpload} from './upload-picture-validation.js';
+
 
 const form = document.querySelector('.img-upload__form');
 const uploadWindow = form.querySelector('.img-upload__overlay');
@@ -19,12 +20,12 @@ let scale;
 let filter;
 
 const onCloseButtonClick = () => {
-  closeUploadEditWindow();
+  closeUploadWindow();
 };
 
 const onCloseButtonKeydown = (evt) => {
-  if (isEscape(evt)) {
-    closeUploadEditWindow();
+  if (isEscape(evt) && !evt.target.matches('.text__hashtags') && !evt.target.matches('.text__description')) {
+    closeUploadWindow();
     uploadCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
   }
 };
@@ -76,7 +77,7 @@ const onEffectClick = (evt) => {
   }
 };
 
-const removeUploadEditWindowHandlers = () => {
+const removeUploadWindowHandlers = () => {
   effectsListNode.removeEventListener('click', onEffectClick);
   uploadCloseButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onCloseButtonKeydown);
@@ -85,12 +86,12 @@ const removeUploadEditWindowHandlers = () => {
   rangeSlider.noUiSlider.destroy();
 };
 
-function closeUploadEditWindow() {
+function closeUploadWindow() {
   uploadWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  uploadField.value = '';
-
-  removeUploadEditWindowHandlers();
+  removeUploadWindowHandlers();
+  form.reset();
+  resetValidation();
 }
 
 const setFilter = () => {
@@ -127,3 +128,10 @@ function openUploadWindow() {
 }
 
 uploadField.addEventListener('change', onUploadFieldChange);
+initPristine(form);
+form.addEventListener('submit', (evt) => {
+  if (!validateUpload()) {
+    evt.preventDefault();
+  }
+  // TODO ... отправка изображения на сервер
+});

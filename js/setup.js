@@ -1,6 +1,7 @@
 const PHOTOS_AMOUNT = 25; // количество моковых объектов фотографий
 const COMMENTS_AMOUNT = 5; // количетво подгружаемых за один раз комментариев
 const COMMENTS_MAX = 17; // максимальное количество генерируемых коментариев
+const HASHTAGS_MAX = 5; // максимальное количество хештегов
 
 const Likes = {
   MIN: 15,
@@ -50,7 +51,7 @@ const FILTERS = {
 };
 
 export {
-  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX,
+  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX,
   Likes, Avatar, Message, Scale,
   SLIDER_SETUP, FILTERS
 };
