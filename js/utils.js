@@ -33,8 +33,9 @@ const getRandomElement = (elements) =>
 
 const isEscape = (evt) => evt.key === 'Escape';
 const isEnter = (evt) => evt.key === 'Enter';
+const isHidden = (element) => element.classList.contains('hidden');
 
 export {
   getRandomInRange, getCounterGenerator, getUniqueRandomGenerator, getRandomElement,
-  isEscape, isEnter
+  isEscape, isEnter, isHidden
 };
