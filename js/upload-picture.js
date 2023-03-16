@@ -39,7 +39,7 @@ const renderScale = () => {
   previewNode.style.transform = `scale(${ scale / 100 })`;
 };
 
-const onScaleControlClick = (evt) => {
+const scaleControlClick = (evt) => {
   let step = Scale.STEP;
   step = evt.target.classList.contains('scale__control--bigger')
     ? step : -step;
@@ -48,6 +48,14 @@ const onScaleControlClick = (evt) => {
   }
   scale += step;
   renderScale();
+};
+
+const onSmallerScaleControlClick = (evt) => {
+  scaleControlClick(evt);
+};
+
+const onBiggerScaleControlClick = (evt) => {
+  scaleControlClick(evt);
 };
 
 const setEffect = (effect) => {
@@ -81,8 +89,8 @@ const removeUploadWindowHandlers = () => {
   effectsListNode.removeEventListener('click', onEffectClick);
   uploadCloseButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onCloseButtonKeydown);
-  smallerControl.removeEventListener('click', onScaleControlClick);
-  biggeerControl.removeEventListener('click', onScaleControlClick);
+  smallerControl.removeEventListener('click', onSmallerScaleControlClick);
+  biggeerControl.removeEventListener('click', onBiggerScaleControlClick);
   rangeSlider.noUiSlider.destroy();
 };
 
@@ -114,8 +122,8 @@ const initUploadWindow = () => {
 };
 
 const setUploadWindowHandlers = () => {
-  smallerControl.addEventListener('click', onScaleControlClick);
-  biggeerControl.addEventListener('click', onScaleControlClick);
+  smallerControl.addEventListener('click', onSmallerScaleControlClick);
+  biggeerControl.addEventListener('click', onBiggerScaleControlClick);
   effectsListNode.addEventListener('click', onEffectClick);
   uploadCloseButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onCloseButtonKeydown);
