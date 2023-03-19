@@ -1,7 +1,8 @@
 import { isEscape, isHidden } from './utils.js';
+import { showSuccess, showError } from './dialogs.js';
 import { Scale, SLIDER_SETUP, FILTERS} from './setup.js';
-import {initPristine, resetValidation, validateUpload} from './upload-picture-validation.js';
-
+import { initPristine, resetValidation, isUploadValid } from './upload-picture-validation.js';
+import { sendPhotos } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
 const uploadWindow = form.querySelector('.img-upload__overlay');
@@ -18,13 +19,18 @@ const effectsListNode = form.querySelector('.effects__list');
 
 let scale;
 let filter;
+let isSending;
 
 const onCloseButtonClick = () => {
   closeUploadWindow();
 };
 
 const onCloseButtonKeydown = (evt) => {
-  if (isEscape(evt) && !evt.target.matches('.text__hashtags') && !evt.target.matches('.text__description')) {
+  const errorModal = document.querySelector('section.error');
+  if (isEscape(evt) &&
+      !evt.target.matches('.text__hashtags') &&
+      !evt.target.matches('.text__description') &&
+      !errorModal) {
     closeUploadWindow();
     uploadCloseButton.removeEventListener('keydown', onCloseButtonKeydown);
   }
@@ -85,16 +91,24 @@ const onEffectClick = (evt) => {
   }
 };
 
+const onOpenUploadWindowSuccessevent = () => {
+  closeUploadWindow();
+};
+
 const removeUploadWindowHandlers = () => {
   effectsListNode.removeEventListener('click', onEffectClick);
   uploadCloseButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onCloseButtonKeydown);
   smallerControl.removeEventListener('click', onSmallerScaleControlClick);
   biggeerControl.removeEventListener('click', onBiggerScaleControlClick);
-  rangeSlider.noUiSlider.destroy();
+  rangeSlider.noUiSlider?.destroy();
+  uploadWindow.addEventListener('success-event', onOpenUploadWindowSuccessevent);
 };
 
 function closeUploadWindow() {
+  if (isSending) {
+    return;
+  }
   uploadWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
   removeUploadWindowHandlers();
@@ -128,6 +142,7 @@ const setUploadWindowHandlers = () => {
   uploadCloseButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onCloseButtonKeydown);
   rangeSlider.noUiSlider.on('update', setFilter);
+  uploadWindow.addEventListener('success-event', onOpenUploadWindowSuccessevent);
 };
 
 function openUploadWindow() {
@@ -137,9 +152,25 @@ function openUploadWindow() {
 
 uploadField.addEventListener('change', onUploadFieldChange);
 initPristine(form);
+
 form.addEventListener('submit', (evt) => {
-  if (!validateUpload()) {
-    evt.preventDefault();
+  evt.preventDefault();
+  if (isUploadValid()) {
+    const formData = new FormData(form);
+    const submitButton = uploadWindow.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    isSending = true;
+    sendPhotos(formData)
+      .then(() => {
+        showSuccess();
+      })
+      .catch(() => {
+        // showAlert(err);
+        showError();
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        isSending = false;
+      });
   }
-  // TODO ... отправка изображения на сервер
 });

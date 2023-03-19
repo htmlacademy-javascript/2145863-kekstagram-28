@@ -11,14 +11,14 @@ const initGalery = (data) => {
 
 const onThumbnailClick = (evt) => {
   if (evt.target.matches('.picture__img')) {
-    const id = evt.target.dataset.id - 1;
+    const id = evt.target.dataset.id;
     showPictureWindow(thumbnails[id]);
   }
 };
 
 const onThumbnailKeyDown = (evt) => {
   if (evt.target.matches('.picture') && isEnter(evt)) {
-    const id = evt.target.querySelector('.picture__img').dataset.id - 1;
+    const id = evt.target.querySelector('.picture__img').dataset.id;
     showPictureWindow(thumbnails[id]);
   }
 };
