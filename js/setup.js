@@ -2,6 +2,22 @@ const PHOTOS_AMOUNT = 25; // количество моковых объекто�
 const COMMENTS_AMOUNT = 5; // количетво подгружаемых за один раз комментариев
 const COMMENTS_MAX = 17; // максимальное количество генерируемых коментариев
 const HASHTAGS_MAX = 5; // максимальное количество хештегов
+const ALERT_SHOW_TIME = 4; // время показа уведомлений в секундах
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Отправляю ...'
+};
+
+const Rest = {
+  BASE_URL: 'https://28.javascript.pages.academy/kekstagram',
+  GET_URL: '/data',
+  POST_URL: '/',
+  Method : {
+    GET: 'GET',
+    POST: 'POST',
+  },
+};
 
 const Likes = {
   MIN: 15,
@@ -51,7 +67,7 @@ const FILTERS = {
 };
 
 export {
-  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX,
-  Likes, Avatar, Message, Scale,
+  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX, ALERT_SHOW_TIME,
+  Likes, Avatar, Message, Scale, Rest, SubmitButtonText,
   SLIDER_SETUP, FILTERS
 };

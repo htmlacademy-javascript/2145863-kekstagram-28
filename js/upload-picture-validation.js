@@ -104,6 +104,6 @@ const resetValidation = () => {
   pristine.reset();
 };
 
-const validateUpload = () => pristine.validate();
+const isUploadValid = () => pristine.validate();
 
-export { initPristine, validateUpload, resetValidation };
+export { initPristine, isUploadValid, resetValidation };
