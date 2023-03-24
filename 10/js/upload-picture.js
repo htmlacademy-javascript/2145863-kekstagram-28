@@ -1,6 +1,6 @@
 import { isEscape, isHidden } from './utils.js';
 import { showSuccess, showError } from './dialogs.js';
-import { Scale, SLIDER_SETUP, FILTERS} from './setup.js';
+import { Scale, SLIDER_SETUP, FILTERS, SubmitButtonText } from './setup.js';
 import { initPristine, resetValidation, isUploadValid } from './upload-picture-validation.js';
 import { sendPhotos } from './api.js';
 
@@ -159,16 +159,17 @@ form.addEventListener('submit', (evt) => {
     const formData = new FormData(form);
     const submitButton = uploadWindow.querySelector('button[type="submit"]');
     submitButton.disabled = true;
+    submitButton.textContent = SubmitButtonText.SENDING;
     isSending = true;
     sendPhotos(formData)
       .then(() => {
         showSuccess();
       })
       .catch(() => {
-        // showAlert(err);
         showError();
       })
       .finally(() => {
+        submitButton.textContent = SubmitButtonText.IDLE;
         submitButton.disabled = false;
         isSending = false;
       });

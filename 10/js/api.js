@@ -5,32 +5,22 @@ const ErrorText = {
   SEND_DATA: 'Не удалось отправить форму.<br> Попробуйте ещё раз',
 };
 
-const getPhotos = () =>
-  fetch(`${Rest.BASE_URL}${Rest.GET_URL}`)
+
+const ioData = (route, errorText, method = Rest.Method.GET, body = null) =>
+  fetch(Rest.BASE_URL + route, { method, body })
     .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error(`${response.status} ${response.statusText}`);
+      if (!response.ok) {
+        return new Error();
       }
+      return response.json();
     })
-    .catch((err) => {
-      throw new Error(`(${err.message.trim()}) ${ErrorText.GET_DATA}`);
+    .catch(() => {
+      throw new Error(errorText);
     });
 
-const sendPhotos = (formData) =>
-  fetch(
-    `${Rest.BASE_URL}${Rest.POST_URL}`,
-    {
-      method: 'POST',
-      body: formData,
-    })
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      } else {
-        throw new Error(ErrorText.SEND_DATA);
-      }
-    });
+const getPhotos = () => ioData(Rest.GET_URL, ErrorText.GET_DATA);
 
-export { getPhotos, sendPhotos };
+const sendPhotos = (formData) => ioData(Rest.POST_URL, ErrorText.POST_DATA, Rest.Method.POST, formData);
+
+export { getPhotos, sendPhotos};
+
