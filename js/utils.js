@@ -1,3 +1,5 @@
+const DEBOUNCE_DELAY = 500;
+
 const isEscape = (evt) => evt.key === 'Escape';
 const isEnter = (evt) => evt.key === 'Enter';
 const isHidden = (element) => element.classList.contains('hidden');
@@ -7,5 +9,13 @@ const formatCommetsAmount = (total) => {
   return res;
 };
 
-export { isEscape, isEnter, isHidden, formatCommetsAmount };
+const debounce = (cb, delay = DEBOUNCE_DELAY) => {
+  let timerId;
+  return (...rest) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(()=> cb.apply(this, rest), delay);
+  };
+};
+
+export { isEscape, isEnter, isHidden, formatCommetsAmount, debounce };
 
