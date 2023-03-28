@@ -19,6 +19,10 @@ const createThumbnail = ({id, url: src, comments, likes, description}) => {
 };
 
 const renderThumbnails = (thumbnails) => {
+
+  const picturesToRemove = pictures.querySelectorAll('.picture');
+  picturesToRemove.forEach((element) => element.remove());
+
   thumbnails.forEach((element) => {
     fragment.append(createThumbnail(element));
   });

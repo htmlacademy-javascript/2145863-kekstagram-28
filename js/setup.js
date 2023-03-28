@@ -3,6 +3,8 @@ const COMMENTS_AMOUNT = 5; // количетво подгружаемых за �
 const COMMENTS_MAX = 17; // максимальное количество генерируемых коментариев
 const HASHTAGS_MAX = 5; // максимальное количество хештегов
 const ALERT_SHOW_TIME = 4; // время показа уведомлений в секундах
+const FILTER_RANDOM_MAX = 10; // максимальное количество в фильтре случайных изображений
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -66,8 +68,14 @@ const FILTERS = {
   heat:   { name: 'brightness', min: 1, max: 3, step: 0.1, init: 3, unit: ''},
 };
 
+const FilterTypes = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCASSED: 'filter-discussed',
+};
+
 export {
   PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX, ALERT_SHOW_TIME,
   Likes, Avatar, Message, Scale, Rest, SubmitButtonText,
-  SLIDER_SETUP, FILTERS
+  SLIDER_SETUP, FILTERS, FilterTypes, FILTER_RANDOM_MAX, FILE_TYPES
 };
