@@ -1,6 +1,6 @@
 import { isEscape, isHidden } from './utils.js';
 import { showSuccess, showError } from './dialogs.js';
-import { Scale, SLIDER_SETUP, FILTERS, SubmitButtonText } from './setup.js';
+import { Scale, SLIDER_SETUP, FILTERS, SubmitButtonText, FILE_TYPES } from './setup.js';
 import { initPristine, resetValidation, isUploadValid } from './upload-picture-validation.js';
 import { sendPhotos } from './api.js';
 
@@ -125,8 +125,18 @@ const setFilter = () => {
   effectLevelControl.value = value;
 };
 
+const updatePreview = ()=> {
+  const file = uploadField.files[0];
+  const fileName = file.name.toLowerCase();
+  const isValidExtention = FILE_TYPES.some((extention) => fileName.endsWith(extention));
+  if (isValidExtention) {
+    previewNode.src = URL.createObjectURL(file);
+  }
+};
+
 const initUploadWindow = () => {
   noUiSlider.create(rangeSlider, SLIDER_SETUP);
+  updatePreview();
   uploadWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
   scale = Scale.INIT;

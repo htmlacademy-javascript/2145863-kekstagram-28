@@ -4,6 +4,7 @@ const COMMENTS_MAX = 17; // максимальное количество ген
 const HASHTAGS_MAX = 5; // максимальное количество хештегов
 const ALERT_SHOW_TIME = 4; // время показа уведомлений в секундах
 const FILTER_RANDOM_MAX = 10; // максимальное количество в фильтре случайных изображений
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -76,5 +77,5 @@ const FilterTypes = {
 export {
   PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX, ALERT_SHOW_TIME,
   Likes, Avatar, Message, Scale, Rest, SubmitButtonText,
-  SLIDER_SETUP, FILTERS, FilterTypes, FILTER_RANDOM_MAX
+  SLIDER_SETUP, FILTERS, FilterTypes, FILTER_RANDOM_MAX, FILE_TYPES
 };
