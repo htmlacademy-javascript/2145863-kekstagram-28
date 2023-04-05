@@ -12,6 +12,7 @@ const initGalery = (data) => {
 
 const onThumbnailClick = (evt) => {
   if (evt.target.matches('.picture__img')) {
+    evt.preventDefault();
     const id = evt.target.dataset.id;
     showPictureWindow(thumbnails[id]);
   }
