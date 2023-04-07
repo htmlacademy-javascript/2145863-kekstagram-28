@@ -1,4 +1,4 @@
-import { HASHTAGS_MAX } from './setup.js';
+import { HASHTAGS_MAX, HASHTAG_MAX_LENGTH } from './setup.js';
 
 let pristine;
 
@@ -42,7 +42,7 @@ const validateChars = (value) => {
       const validChars = hash.match(/^.[a-zа-я0-9]{1,19}/i);
       if (validChars === null || hash.trim() === '#') {
         return false;
-      } else if (validChars.join('') !== hash || hash.length > 20) {
+      } else if (validChars.join('') !== hash || hash.length > HASHTAG_MAX_LENGTH) {
         return false;
       }
     }
@@ -90,7 +90,7 @@ const initPristine = (form) => {
     'Хеш тег не должен содержать только символ #'
   );
   pristine.addValidator(hashtagsNode, validateChars,
-    'Хештег должен содержать только буквы и цифры (не более 20)'
+    `Хештег должен содержать только буквы и цифры (не более ${HASHTAG_MAX_LENGTH})`
   );
   pristine.addValidator(hashtagsNode, validateHastagsAmount,
     'Допускается не более 5 хештегов'

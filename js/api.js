@@ -10,7 +10,7 @@ const ioData = (route, errorText, method = Rest.Method.GET, body = null) =>
   fetch(Rest.BASE_URL + route, { method, body })
     .then((response) => {
       if (!response.ok) {
-        return new Error();
+        throw new Error(errorText);
       }
       return response.json();
     })
