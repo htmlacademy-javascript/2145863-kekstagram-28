@@ -1,5 +1,7 @@
-import { ALERT_SHOW_TIME } from './setup.js';
 import { isEscape } from './utils.js';
+
+const ALERT_SHOW_TIME = 4000; // время показа уведомлений в миллисекундах
+const ALERT_FADE_TIME = 1000; // время исчезания сообщения в миллисекундах
 
 const successEvent = new Event('success-event');
 const upload = document.querySelector('.img-upload__overlay');
@@ -94,8 +96,8 @@ const showAlert = (message) => {
       alertContainer.style.opacity = '0';
       setTimeout(()=> {
         alertContainer.remove();
-      }, 1000);
-    }, ALERT_SHOW_TIME * 1000);
+      }, ALERT_FADE_TIME);
+    }, ALERT_SHOW_TIME);
   }, 1);
 };
 

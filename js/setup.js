@@ -2,7 +2,7 @@ const PHOTOS_AMOUNT = 25; // количество моковых объекто�
 const COMMENTS_AMOUNT = 5; // количетво подгружаемых за один раз комментариев
 const COMMENTS_MAX = 17; // максимальное количество генерируемых коментариев
 const HASHTAGS_MAX = 5; // максимальное количество хештегов
-const ALERT_SHOW_TIME = 4; // время показа уведомлений в секундах
+const HASHTAG_MAX_LENGTH = 20; // максимальная длина хеш-тега
 const FILTER_RANDOM_MAX = 10; // максимальное количество в фильтре случайных изображений
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -75,7 +75,7 @@ const FilterTypes = {
 };
 
 export {
-  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX, ALERT_SHOW_TIME,
+  PHOTOS_AMOUNT, COMMENTS_AMOUNT, COMMENTS_MAX, HASHTAGS_MAX, HASHTAG_MAX_LENGTH,
   Likes, Avatar, Message, Scale, Rest, SubmitButtonText,
   SLIDER_SETUP, FILTERS, FilterTypes, FILTER_RANDOM_MAX, FILE_TYPES
 };
